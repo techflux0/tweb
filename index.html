@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TriviaPro - Challenge Your Mind</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #4A6FA5;
+            --secondary: #FF7E5F;
+            --accent: #6B5B95;
+            --light: #F8F9FA;
+            --dark: #2C3E50;
+            --success: #2ECC71;
+            --info: #3498DB;
+            --warning: #F39C12;
+            --danger: #E74C3C;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            position: relative;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            z-index: 1001;
+        }
+
+        .logo i {
+            color: var(--secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            left: 0;
+            bottom: 0;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(74, 111, 165, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(74, 111, 165, 0.4);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--primary);
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .mobile-menu-content {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100%;
+            background: white;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            padding: 80px 30px 30px;
+            transition: right 0.3s ease;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .mobile-menu-content.active {
+            right: 0;
+        }
+
+        .mobile-menu-content .nav-links {
+            flex-direction: column;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .mobile-menu-content .nav-links a {
+            font-size: 18px;
+            width: 100%;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .mobile-menu-content .cta-button {
+            margin-top: 20px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .close-menu {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 180px 0 100px;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1531297484001-80022131f5a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
+            opacity: 0.2;
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 800;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .store-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .store-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--dark);
+            padding: 12px 25px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+
+        .store-btn:hover {
+            transform: translateY(-3px);
+            background: white;
+        }
+
+        /* Features Section */
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features {
+            padding: 100px 0;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 30px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        /* Screenshots Section */
+        .screenshots {
+            padding: 100px 0;
+        }
+
+        .screenshot-slider {
+            display: flex;
+            gap: 30px;
+            overflow-x: auto;
+            padding: 20px 0;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary) transparent;
+        }
+
+        .screenshot-slider::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .screenshot-slider::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .screenshot-slider::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
+
+        .screenshot {
+            flex: 0 0 auto;
+            width: 250px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .screenshot img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s;
+        }
+
+        .screenshot:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 80px 0;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .stat-item {
+            color: white;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--secondary);
+        }
+
+        .stat-label {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 100px 0;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+
+        .author-info h4 {
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+
+        .author-info p {
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+
+        /* Download Section */
+        .download {
+            padding: 100px 0;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .download-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .download h2 {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .download p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 40px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero {
+                padding: 150px 0 80px;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .store-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .store-btn {
+                width: 100%;
+                max-width: 250px;
+                justify-content: center;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .feature-card {
+                padding: 30px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .stat-number {
+                font-size: 2.5rem;
+            }
+            
+            .download h2 {
+                font-size: 2rem;
+            }
+            
+            .container {
+                width: 95%;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate {
+            animation: fadeInUp 0.8s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+    
+    <!-- Mobile Menu Content -->
+    <div class="mobile-menu-content" id="mobileMenuContent">
+        <button class="close-menu" id="closeMenu">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="nav-links">
+            <a href="#features" onclick="closeMobileMenu()">Features</a>
+            <a href="#screenshots" onclick="closeMobileMenu()">Screenshots</a>
+            <a href="#testimonials" onclick="closeMobileMenu()">Testimonials</a>
+            <a href="#download" onclick="closeMobileMenu()">Download</a>
+            <a href="p/privacy-policy.html" onclick="closeMobileMenu()">Privacy Policy</a>
+            <a href="p/terms-conditions.html" onclick="closeMobileMenu()">Terms & Conditions</a>
+            <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+            <a href="#download" class="cta-button" onclick="closeMobileMenu()">
+                <i class="fas fa-download"></i> Download Now
+            </a>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">
+                    <i class="fas fa-brain"></i>
+                    TriviaPro
+                </a>
+                <div class="nav-links">
+                    <a href="#features">Features</a>
+                    <a href="#screenshots">Screenshots</a>
+                    <a href="#testimonials">Testimonials</a>
+                    <a href="#download">Download</a>
+                    <a href="p/privacy-policy.html">Privacy Policy</a>
+                    <a href="p/terms-conditions.html">Terms & Conditions</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <a href="#download" class="cta-button">
+                    <i class="fas fa-download"></i> Download Now
+                </a>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="container">
+            <div class="hero-content animate">
+                <h1>Challenge Your Mind With TriviaPro</h1>
+                <p>Join millions of players worldwide in the ultimate trivia experience. Test your knowledge across 50+ categories, compete with friends, and climb the leaderboards!</p>
+                <div class="hero-buttons">
+                    <a href="#download" class="cta-button">
+                        <i class="fas fa-download"></i> Download Now
+                    </a>
+                    <a href="#features" class="cta-button" style="background: rgba(255, 255, 255, 0.2);">
+                        <i class="fas fa-play-circle"></i> Learn More
+                    </a>
+                </div>
+                <div class="store-buttons">
+                    <a href="#" class="store-btn">
+                        <i class="fab fa-google-play"></i>
+                        <div>
+                            <small>GET IT ON</small>
+                            <div>Google Play</div>
+                        </div>
+                    </a>
+                    <a href="#" class="store-btn">
+                        <i class="fab fa-apple"></i>
+                        <div>
+                            <small>Download on the</small>
+                            <div>App Store</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-title animate">
+                <h2>Amazing Features</h2>
+                <p>Discover what makes TriviaPro the #1 trivia app worldwide</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card animate">
+                    <div class="feature-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>10,000+ Questions</h3>
+                    <p>Massive database of questions across science, history, sports, entertainment, and more.</p>
+                </div>
+                <div class="feature-card animate">
+                    <div class="feature-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3>Daily Challenges</h3>
+                    <p>Compete in daily tournaments and special events to win exclusive rewards and climb leaderboards.</p>
+                </div>
+                <div class="feature-card animate">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Multiplayer Mode</h3>
+                    <p>Challenge friends or random players in real-time trivia battles with live chat.</p>
+                </div>
+                <div class="feature-card animate">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Progress Tracking</h3>
+                    <p>Detailed statistics and progress tracking to monitor your knowledge growth.</p>
+                </div>
+                <div class="feature-card animate">
+                    <div class="feature-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <h3>Multiple Game Modes</h3>
+                    <p>Classic, timed, survival, and team modes to keep the gameplay fresh and exciting.</p>
+                </div>
+                <div class="feature-card animate">
+                    <div class="feature-icon">
+                        <i class="fas fa-gift"></i>
+                    </div>
+                    <h3>Rewards System</h3>
+                    <p>Earn coins, unlock achievements, and collect exclusive badges for your accomplishments.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshots -->
+    <section id="screenshots" class="screenshots">
+        <div class="container">
+            <div class="section-title animate">
+                <h2>App Screenshots</h2>
+                <p>See TriviaPro in action with our beautifully designed interface</p>
+            </div>
+            <div class="screenshot-slider">
+                <div class="screenshot">
+                    <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Home Screen">
+                </div>
+                <div class="screenshot">
+                    <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Game Screen">
+                </div>
+                <div class="screenshot">
+                    <img src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Categories">
+                </div>
+                <div class="screenshot">
+                    <img src="https://images.unsplash.com/photo-1542751110-97427bbecf20?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Leaderboard">
+                </div>
+                <div class="screenshot">
+                    <img src="https://images.unsplash.com/photo-1593305841991-05c297ba4575?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Profile">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item animate">
+                    <div class="stat-number">2M+</div>
+                    <div class="stat-label">Active Players</div>
+                </div>
+                <div class="stat-item animate">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Categories</div>
+                </div>
+                <div class="stat-item animate">
+                    <div class="stat-number">4.8</div>
+                    <div class="stat-label">App Store Rating</div>
+                </div>
+                <div class="stat-item animate">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Live Support</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <div class="section-title animate">
+                <h2>What Players Say</h2>
+                <p>Join our community of satisfied trivia enthusiasts</p>
+            </div>
+            <div class="testimonial-grid">
+                <div class="testimonial-card animate">
+                    <div class="testimonial-text">
+                        "TriviaPro has completely changed my daily routine. I've learned so much while having fun competing with friends!"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JS</div>
+                        <div class="author-info">
+                            <h4>John Smith</h4>
+                            <p>Teacher & Trivia Enthusiast</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card animate">
+                    <div class="testimonial-text">
+                        "The variety of questions is incredible! From science to pop culture, there's always something new to learn."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MD</div>
+                        <div class="author-info">
+                            <h4>Maria Davis</h4>
+                            <p>Software Developer</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card animate">
+                    <div class="testimonial-text">
+                        "Perfect for family game nights! My kids love it as much as I do. Educational and entertaining."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">RW</div>
+                        <div class="author-info">
+                            <h4>Robert Wilson</h4>
+                            <p>Parent & Daily Player</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="download" class="download">
+        <div class="container">
+            <div class="download-content animate">
+                <h2>Ready to Challenge Your Mind?</h2>
+                <p>Download TriviaPro now and join the world's largest trivia community. Free to play with optional premium features.</p>
+                <div class="store-buttons">
+                    <a href="#" class="store-btn">
+                        <i class="fab fa-google-play"></i>
+                        <div>
+                            <small>GET IT ON</small>
+                            <div>Google Play</div>
+                        </div>
+                    </a>
+                    <a href="#" class="store-btn">
+                        <i class="fab fa-apple"></i>
+                        <div>
+                            <small>Download on the</small>
+                            <div>App Store</div>
+                        </div>
+                    </a>
+                </div>
+                <p style="margin-top: 20px; font-size: 0.9rem; opacity: 0.7;">
+                    Available on Android 8.0+ and iOS 12.0+
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>TriviaPro</h3>
+                    <p>The ultimate trivia experience that challenges your mind and expands your knowledge.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#screenshots">Screenshots</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#download">Download</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="p/privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="p/terms-conditions.html">Terms & Conditions</a></li>
+                        <li><a href="p/cookie-policy.html">Cookie Policy</a></li>
+                        <li><a href="p/contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope"></i> privacytechflux@gmail.com</li>
+                        <li><i class="fas fa-phone"></i> +254 798 7084 44</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Nakuru West</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; <span id="currentYear"></span> TriviaPro by TechFlux. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu functionality
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenuContent = document.getElementById('mobileMenuContent');
+        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+        const closeMenuBtn = document.getElementById('closeMenu');
+        
+        function openMobileMenu() {
+            mobileMenuContent.classList.add('active');
+            mobileMenuOverlay.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeMobileMenu() {
+            mobileMenuContent.classList.remove('active');
+            mobileMenuOverlay.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        mobileMenuBtn.addEventListener('click', openMobileMenu);
+        closeMenuBtn.addEventListener('click', closeMobileMenu);
+        mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+        
+        // Close menu when clicking on links in mobile menu
+        document.querySelectorAll('.mobile-menu-content a').forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
+        
+        // Observe elements for animation
+        document.querySelectorAll('.feature-card, .section-title, .stat-item, .testimonial-card, .download-content').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Auto-scroll for screenshots
+        let scrollDirection = 1;
+        const slider = document.querySelector('.screenshot-slider');
+        
+        function autoScrollScreenshots() {
+            if(!slider) return;
+            
+            if(slider.scrollLeft >= (slider.scrollWidth - slider.clientWidth)) {
+                scrollDirection = -1;
+            } else if(slider.scrollLeft <= 0) {
+                scrollDirection = 1;
+            }
+            
+            slider.scrollLeft += scrollDirection * 1;
+        }
+        
+        // Start auto-scroll
+        let scrollInterval;
+        if(slider) {
+            scrollInterval = setInterval(autoScrollScreenshots, 30);
+            
+            // Pause on hover
+            slider.addEventListener('mouseenter', () => clearInterval(scrollInterval));
+            slider.addEventListener('mouseleave', () => {
+                scrollInterval = setInterval(autoScrollScreenshots, 30);
+            });
+        }
+        
+        // Update year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

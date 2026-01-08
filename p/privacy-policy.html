@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - TriviaPro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #4A6FA5;
+            --secondary: #FF7E5F;
+            --accent: #6B5B95;
+            --light: #F8F9FA;
+            --dark: #2C3E50;
+        }
+
+        body {
+            background: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            position: relative;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .logo i {
+            color: var(--secondary);
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 20px;
+        }
+
+        .back-button:hover {
+            text-decoration: underline;
+        }
+
+        /* Main Content */
+        .legal-header {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 80px 0 60px;
+            text-align: center;
+        }
+
+        .legal-header h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .legal-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .legal-content {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            margin: -40px auto 60px;
+            padding: 60px;
+            position: relative;
+        }
+
+        .last-updated {
+            background: var(--light);
+            padding: 10px 20px;
+            border-radius: 30px;
+            display: inline-block;
+            font-weight: 500;
+            color: var(--dark);
+            margin-bottom: 30px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light);
+        }
+
+        .section p {
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        .section ul {
+            list-style-type: none;
+            margin: 15px 0 15px 20px;
+        }
+
+        .section ul li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .section ul li:before {
+            content: "•";
+            color: var(--primary);
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: -3px;
+        }
+
+        .highlight-box {
+            background: var(--light);
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .contact-info {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 40px;
+        }
+
+        .contact-info h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .contact-info a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .legal-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .legal-content {
+                padding: 30px 20px;
+                margin: -30px 15px 40px;
+            }
+            
+            .section h2 {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .legal-header h1 {
+                font-size: 2rem;
+            }
+            
+            .legal-header p {
+                font-size: 1rem;
+            }
+            
+            .container {
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="../index.html" class="logo">
+                    <i class="fas fa-brain"></i>
+                    TriviaPro
+                </a>
+                <a href="../index.html" class="back-button">
+                    <i class="fas fa-arrow-left"></i> Back to Home
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <section class="legal-header">
+        <div class="container">
+            <h1>Privacy Policy</h1>
+            <p>Your privacy is important to us. This policy explains how we collect, use, and protect your information.</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="legal-content">
+            <div class="last-updated">
+                Last Updated: <span id="currentDate"></span>
+            </div>
+
+            <div class="section">
+                <h2>1. Information We Collect</h2>
+                <p>We collect information to provide better services to all our users. The types of information we collect include:</p>
+                <ul>
+                    <li><strong>Personal Information:</strong> When you create an account, we collect your email address and username.</li>
+                    <li><strong>Game Data:</strong> Your game progress, scores, achievements, and preferences.</li>
+                    <li><strong>Device Information:</strong> Device type, operating system, unique device identifiers, and mobile network information.</li>
+                    <li><strong>Location Data:</strong> With your permission, we may collect general location data to provide localized content.</li>
+                    <li><strong>Usage Information:</strong> How you interact with our app, including gameplay patterns and feature usage.</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>2. How We Use Your Information</h2>
+                <p>We use the information we collect for the following purposes:</p>
+                <ul>
+                    <li>To provide, maintain, and improve our services</li>
+                    <li>To personalize your gaming experience</li>
+                    <li>To communicate with you about updates, promotions, and news</li>
+                    <li>To detect, prevent, and address technical issues</li>
+                    <li>To ensure compliance with our Terms of Service</li>
+                    <li>To analyze usage patterns and optimize game performance</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>3. Data Sharing and Disclosure</h2>
+                <p>We do not sell your personal data. We may share your information in the following circumstances:</p>
+                <ul>
+                    <li><strong>Service Providers:</strong> With trusted third parties who assist in operating our app (analytics, hosting, customer support).</li>
+                    <li><strong>Legal Requirements:</strong> When required by law or to protect our rights and safety.</li>
+                    <li><strong>Business Transfers:</strong> In connection with a merger, acquisition, or sale of assets.</li>
+                    <li><strong>Aggregated Data:</strong> We may share anonymized, aggregated data for research and analysis.</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2>4. Data Security</h2>
+                <p>We implement appropriate technical and organizational measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. However, no method of transmission over the Internet or electronic storage is 100% secure.</p>
+            </div>
+
+            <div class="section">
+                <h2>5. Your Rights and Choices</h2>
+                <p>Depending on your location, you may have the following rights regarding your personal information:</p>
+                <ul>
+                    <li><strong>Access:</strong> Request access to the personal data we hold about you.</li>
+                    <li><strong>Correction:</strong> Request correction of inaccurate or incomplete data.</li>
+                    <li><strong>Deletion:</strong> Request deletion of your personal data.</li>
+                    <li><strong>Opt-out:</strong> Opt-out of marketing communications at any time.</li>
+                    <li><strong>Data Portability:</strong> Request a copy of your data in a structured format.</li>
+                </ul>
+                <p>To exercise these rights, please contact us using the information below.</p>
+            </div>
+
+            <div class="section">
+                <h2>6. Children's Privacy</h2>
+                <p>Our service is not directed to children under 13. We do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe your child has provided us with personal information, please contact us immediately.</p>
+            </div>
+
+            <div class="section">
+                <h2>7. International Data Transfers</h2>
+                <p>Your information may be transferred to and maintained on computers located outside of your country where data protection laws may differ. We take appropriate safeguards to ensure your data remains protected.</p>
+            </div>
+
+            <div class="section">
+                <h2>8. Changes to This Policy</h2>
+                <p>We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last Updated" date.</p>
+            </div>
+
+            <div class="contact-info">
+                <h3>Contact Us</h3>
+                <p>If you have any questions about this Privacy Policy, please contact us:</p>
+                <p><strong>Email:</strong> <a href="mailto:privacytechflux@gmail.com">privacytechflux@gmail.com</a></p>
+                <p><strong>Address:</strong> Nakuru West </p>
+                <p><strong>Phone:</strong> +254 798 7084 44</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>TriviaPro</h3>
+                    <p>Challenge your mind, expand your knowledge.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="terms-conditions.html">Terms & Conditions</a></li>
+                        <li><a href="cookie-policy.html">Cookie Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul class="footer-links">
+                        <li><a href="mailto:privacytechflux@gmail.com">privacytechflux@gmail.com</a></li>
+                        <li><a href="tel:+254798708444">+254 798 7084 44</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; <span id="currentYear"></span> TriviaPro by TechFlux. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Set current date
+        const currentDate = new Date().toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+        document.getElementById('currentDate').textContent = currentDate;
+        
+        // Set current year
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
