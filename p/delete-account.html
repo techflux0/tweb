@@ -1,1 +1,98 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Deletion Request - Quiz IQ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        h1 {
+            font-size: 22px;
+        }
+        p {
+            line-height: 1.5;
+            color: #333;
+        }
+        form {
+            margin-top: 20px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+        button {
+            margin-top: 15px;
+            padding: 10px;
+            width: 100%;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .note {
+            font-size: 13px;
+            color: #666;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Account & Data Deletion Request</h1>
+
+    <p>
+        This page allows users of <b>Quiz IQ</b> to request deletion of their account and associated data.
+    </p>
+
+    <p>
+        If you signed in using Google Sign-In, your account is linked to your Google email address.
+    </p>
+
+    <h3>What will be deleted:</h3>
+    <ul>
+        <li>Firebase Authentication account</li>
+        <li>User profile data</li>
+        <li>Quiz progress and scores</li>
+        <li>Any stored user activity data</li>
+    </ul>
+
+    <h3>Request deletion</h3>
+
+    <form action="mailto:your-email@gmail.com" method="post" enctype="text/plain">
+        <label>Email Address (used in app)</label>
+        <input type="email" name="email" required>
+
+        <label>Reason (optional)</label>
+        <textarea name="reason" rows="4"></textarea>
+
+        <button type="submit">Send Deletion Request</button>
+    </form>
+
+    <p class="note">
+        Requests are processed within 7–30 days. You may also delete your account directly inside the app.
+    </p>
+</div>
+
+</body>
+</html>
